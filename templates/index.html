@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Homework Manager</title>
+</head>
+<body>
+    <header class="nav-bar">
+        <h1>my <span>Homework Manager</span></h1>
+        <div class="web-create-box">
+            <button id="web-create-button">
+                <div class="profile-box">
+                    <img src="{{ url_for('static', filename='menu.png') }}" width=30px alt="menu">
+                    <img src="{{ url_for('static', filename='user.png') }}" width=30px alt="user">
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <div>
+        <div class="list-box">
+            <div>
+                {% for task in data %}
+                <div class="task">
+                    <div class="name">
+                        <button class="completion"></button>
+                        <h3>{{task['title']}}</h3>
+                    </div>
+                    <ul>
+                        {% if 'due' in task %}
+                        <li>
+                            Due Date: <span class="date-text">{{convertDate(task['due'])}}</span>
+                        </li>
+                        {% endif %}
+                        
+                        {% if 'notes' in task %}
+                        <li>
+                            <br>Notes: {{task["notes"]}}
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menu-box">
+                <button>Home</button>
+                <button>Manage classes</button>
+                <button>Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-task-box">
+        
+    </div>
+
+    <div class="create-box">
+        <button id="create-button">+</button>
+    </div>
+
+
+</body>
+</html>
